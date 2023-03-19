@@ -11,6 +11,8 @@
             --labelSize: 1.3em;
             --radiosWidth: calc(var(--labelSize) * var(--count));
             --marginRight: 2vw;
+            --totalWidth: calc((var(--imgWidth) + var(--marginRight)) * var(--count));
+            --sliderTransition: transform 1s;
 
 
             width: var(--imgWidth);
@@ -39,8 +41,8 @@
 
         #imgs {
             display: flex;
-            width: calc((var(--imgWidth) + var(--marginRight)) * var(--count));
-            transition: transform 1s;
+            width: calc(var(--totalWidth));
+            transition: var(--sliderTransition);
         }
 
         .img {
@@ -57,13 +59,14 @@
 
         #ps {
             display: flex;
-            width: calc(var(--imgWidth) * var(--count));
-            transition: transform 1s;
+            width: calc(var(--totalWidth));
+            transition: var(--sliderTransition);
         }
 
         .p {
             width: var(--imgWidth);
-            margin: 0vh 22vw 0vh 0vh;
+            margin: 0;
+            margin-right: calc(var(--radiosWidth) + var(--marginRight));
             color: white;
         }
 
@@ -88,9 +91,9 @@
         }
 
         .radio__fake {
-            --radioSize: 0.55em;
-            width: var(--radioSize);
-            height: var(--radioSize);
+            --radiowSize: 0.55em;
+            width: var(--radiowSize);
+            height: var(--radiowSize);
 
             border: 0.1em solid #70a6fF;
             border-radius: 50%;
