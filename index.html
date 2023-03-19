@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+    <title>cssSlider</title>
+    <style>
+        body { background-color: #333333; }
+
+        #slider {
+            --imgWidth: 80vw;
+            --count: 4;
+            --percent: calc(100% / var(--count));
+            --labelSize: 1.3em;
+            --radiosWidth: calc(var(--labelSize) * var(--count));
+            --marginRight: 2vw;
+
+
+            width: var(--imgWidth);
+            margin: auto;
+            padding: 1vw;
+            padding-bottom: 1em;
+
+            display: flex;
+            flex-direction: column-reverse;
+            background-color: #333333;
+            gap: 1em;
+        }
+
+        #slider-part {
+            width: 100%;
+
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
+
+        #imgs-box {
+            overflow: hidden;
+            width: var(--imgWidth);
+        }
+
+        #imgs {
+            display: flex;
+            width: calc((var(--imgWidth) + var(--marginRight)) * var(--count));
+            transition: transform 1s;
+        }
+
+        .img {
+            width: var(--imgWidth);
+            height: 40vw;
+            margin-right: var(--marginRight);
+        }
+
+        #ps-box {
+            overflow: hidden;
+            width: calc(var(--imgWidth) - var(--radiosWidth));
+            align-self: center;
+        }
+
+        #ps {
+            display: flex;
+            width: calc(var(--imgWidth) * var(--count));
+            transition: transform 1s;
+        }
+
+        .p {
+            width: var(--imgWidth);
+            margin: 0vh 22vw 0vh 0vh;
+            color: white;
+        }
+
+        #radios {
+            width: var(--radiosWidth);
+
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .radio { visibility: hidden; height: 0em; }
+
+        .label {
+            margin: 0em;
+            width: var(--labelSize);
+            height: var(--labelSize);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radio__fake {
+            --radiowSize: 0.55em;
+            width: var(--radiowSize);
+            height: var(--radiowSize);
+
+            border: 0.1em solid #70a6fF;
+            border-radius: 50%;
+            background-color: #70a6fF;
+            transition: 0.3s;
+        }
+
+        .label:hover { cursor: pointer; }
+        .label:hover > .radio__fake { border: 0.2em solid white; background-color: white; }
+
+        /* The lines below must be auto-generated in a loop */
+        #r1:checked ~ #slider > #slider-part > #radios > .label[for="r1"] > .radio__fake { background-color: transparent; }
+        #r2:checked ~ #slider > #slider-part > #radios > .label[for="r2"] > .radio__fake { background-color: transparent; }
+        #r3:checked ~ #slider > #slider-part > #radios > .label[for="r3"] > .radio__fake { background-color: transparent; }
+        #r4:checked ~ #slider > #slider-part > #radios > .label[for="r4"] > .radio__fake { background-color: transparent; }
+
+        #r1:checked ~ #slider > #imgs-box > #imgs { transform: translateX(calc(var(--percent) * -0)); }
+        #r2:checked ~ #slider > #imgs-box > #imgs { transform: translateX(calc(var(--percent) * -1)); }
+        #r3:checked ~ #slider > #imgs-box > #imgs { transform: translateX(calc(var(--percent) * -2)); }
+        #r4:checked ~ #slider > #imgs-box > #imgs { transform: translateX(calc(var(--percent) * -3)); }
+
+        #r1:checked ~ #slider > #slider-part > #ps-box > #ps { transform: translateX(calc(var(--percent) * -0)); }
+        #r2:checked ~ #slider > #slider-part > #ps-box > #ps { transform: translateX(calc(var(--percent) * -1)); }
+        #r3:checked ~ #slider > #slider-part > #ps-box > #ps { transform: translateX(calc(var(--percent) * -2)); }
+        #r4:checked ~ #slider > #slider-part > #ps-box > #ps { transform: translateX(calc(var(--percent) * -3)); }
+
+        @media screen and (max-width: 640px) {
+            #ps-box { width: calc(var(--imgWidth) - var(--marginRight)); }
+            .p { margin-right: var(--marginRight); }
+            #slider-part { flex-direction: column; gap: 1em; }
+            #radios { width: var(--imgWidth); justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <input class="radio" type="radio" name="rs" id="r1" checked />
+    <input class="radio" type="radio" name="rs" id="r2"/>
+    <input class="radio" type="radio" name="rs" id="r3"/>
+    <input class="radio" type="radio" name="rs" id="r4"/>
+    <div id="slider">
+        <div id="slider-part">
+            <div id="radios">
+                <label for="r1" class="label"><div class="radio__fake"></div></label>
+                <label for="r2" class="label"><div class="radio__fake"></div></label>
+                <label for="r3" class="label"><div class="radio__fake"></div></label>
+                <label for="r4" class="label"><div class="radio__fake"></div></label>
+            </div>
+            <div id="ps-box">
+                <div id="ps">
+                    <p class="p">Suspendisse at ultricies libero. Donec.</p>
+                    <p class="p">Donec in diam eget erat.</p>
+                    <p class="p">Suspendisse dictum iaculis viverra. Integer libero dolor, tristique.</p>
+                    <p class="p">Donec vitae pellentesque lorem. Integer.</p>
+                </div>
+            </div>
+        </div>
+        <div id="imgs-box">
+            <div id="imgs">
+                <img class="img" src="https://picsum.photos/1800/900?random=1" alt="rng1">
+                <img class="img" src="https://picsum.photos/1800/900?random=2" alt="rng2">
+                <img class="img" src="https://picsum.photos/1800/900?random=3" alt="rng3">
+                <img class="img" src="https://picsum.photos/1800/900?random=4" alt="rng4">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
